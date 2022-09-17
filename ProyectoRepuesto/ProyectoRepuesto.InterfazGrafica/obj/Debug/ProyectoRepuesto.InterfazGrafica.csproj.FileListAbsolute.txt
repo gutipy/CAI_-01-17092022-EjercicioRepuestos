@@ -1,0 +1,3 @@
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.AssemblyReference.cache
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.SuggestedBindingRedirects.cache
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.CoreCompileInputs.cache
