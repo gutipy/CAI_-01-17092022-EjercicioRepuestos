@@ -102,7 +102,7 @@ namespace ProyectoRepuesto.Dominio.Entidades
                 {
                     if (r.Codigo == codigoRepuesto)
                     {
-                        r.Stock = stockRepuesto;
+                        r.Stock = r.Stock + stockRepuesto;
                     }
                 }
             }
@@ -110,6 +110,9 @@ namespace ProyectoRepuesto.Dominio.Entidades
 
         public void QuitarStock(int codigoRepuesto, int stockRepuesto)
         {
+            //Declaración de variables
+            int _resultadoStock;
+
             if (_listaRepuestos.Find(R => R.Codigo == codigoRepuesto) == null)
             {
                 throw new CodigoRepuestoNoExisteException(codigoRepuesto);
@@ -118,9 +121,15 @@ namespace ProyectoRepuesto.Dominio.Entidades
             {
                 foreach (Repuesto r in _listaRepuestos)
                 {
-                    if (r.Codigo == codigoRepuesto)
+                    if (stockRepuesto > r.Stock)
                     {
-                        r.Stock = stockRepuesto;
+                        _resultadoStock = r.Stock - stockRepuesto;
+
+                        throw new StockNegativoException(_resultadoStock);
+                    }
+                    else if (r.Codigo == codigoRepuesto)
+                    {
+                        _resultadoStock = r.Stock - stockRepuesto;
                     }
                 }
             }

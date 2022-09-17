@@ -48,6 +48,7 @@
     <Compile Include="Excepciones\CodigoRepuestoNoExisteException.cs" />
     <Compile Include="Excepciones\ListadoProductosLlenoException.cs" />
     <Compile Include="Excepciones\NoSePuedeBorrarPorStockException.cs" />
+    <Compile Include="Excepciones\StockNegativoException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

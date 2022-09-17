@@ -2,6 +2,7 @@
 using ProyectoRepuesto.Dominio.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,18 +46,30 @@ namespace ProyectoRepuesto.InterfazGrafica
                     {
                         case "1":
                             //Listar repuestos del negocio por categoría
-                            Listar(tableroElectronico, _estado);
+                            Listar(gestorRepuestos);
                             break;
                         case "2":
-                            //Cambio el estado a una tarea del tablero
-                            Cambiar(tableroElectronico);
+                            //Agrego un repuesto al listado
+                            AgregarR(gestorRepuestos);
                             break;
                         case "3":
-                            //Agrego una tarea al tablero
-                            Agregar(tableroElectronico);
+                            //Elimino un repuesto del listado
+                            Eliminar(gestorRepuestos);
                             break;
                         case "4":
-                            //Salir del programa
+                            //Modifico el precio de un repuesto
+                            Modificar(gestorRepuestos);
+                            break;
+                        case "5":
+                            //Agrego el stock de un repuesto
+                            AgregarS(gestorRepuestos);
+                            break;
+                        case "6":
+                            //Modifico el precio de un repuesto
+                            QuitarS(gestorRepuestos);
+                            break;
+                        case "7":
+                            //Salgo del programa
                             Salir();
                             break;
                     }
@@ -86,7 +99,7 @@ namespace ProyectoRepuesto.InterfazGrafica
                 ;
         }
 
-        public static void Listar(VentaRepuestos gestorRepuestos, int codigoCategoria)
+        public static void Listar(VentaRepuestos gestorRepuestos)
         {
             //Declaración de variables
             string _codigoCategoria;
@@ -103,7 +116,195 @@ namespace ProyectoRepuesto.InterfazGrafica
 
             Categoria C = new Categoria(_codigoCategoriaValidado);
 
-            gestorRepuestos.TraerPorCategoria(C);
+            Console.WriteLine(gestorRepuestos.TraerPorCategoria(C));
+        }
+
+        public static void AgregarR(VentaRepuestos gestorRepuestos)
+        {
+            //Declaración de variables
+            string _nombreRepuesto;
+            string _precioRepuesto;
+            double _precioRepuestoValidado = 0;
+            string _stockRepuesto;
+            int _stockRepuestoValidado = 0;
+            string _codigoCategoria;
+            int _codigoCategoriaValidado = 0;
+            string _nombreCategoria;
+            bool flag;
+
+            //Pido al usuario que ingrese los datos del repuesto y a la vez valido cada input ingresado
+            do
+            {
+                Console.WriteLine("Ingrese el nombre del repuesto");
+                _nombreRepuesto = Console.ReadLine();
+                flag = FuncionValidacionCadena(ref _nombreRepuesto);
+
+            }while(flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese el precio del repuesto");
+                _precioRepuesto = Console.ReadLine();
+                flag = FuncionValidacionPrecio(_precioRepuesto, ref _precioRepuestoValidado);
+
+            } while (flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese el stock del repuesto");
+                _stockRepuesto = Console.ReadLine();
+                flag = FuncionValidacionStock(_stockRepuesto, ref _stockRepuestoValidado);
+
+            } while (flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese el código de la categoría del repuesto");
+                _codigoCategoria = Console.ReadLine();
+                flag = FuncionValidacionCodigo(_codigoCategoria, ref _codigoCategoriaValidado);
+
+            } while (flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese el nombre de la categoría del repuesto");
+                _nombreCategoria = Console.ReadLine();
+                flag = FuncionValidacionCadena(ref _nombreCategoria);
+
+            } while (flag == false);
+
+            //Instancio la clase Categoria y le asigno los valores ingresados por el usuario
+            Categoria C = new Categoria(
+                _codigoCategoriaValidado,
+                _nombreCategoria
+                )
+                ;
+
+            //Instancio la clase Repuesto y le asigno los valores ingresados por el usuario
+            Repuesto R = new Repuesto(
+                _nombreRepuesto,
+                _precioRepuestoValidado,
+                _stockRepuestoValidado,
+                C
+                )
+                ;
+
+            //Agrego el repuesto al gestor de repuestos
+            gestorRepuestos.AgregarRepuesto(R);
+
+            Console.WriteLine("El repuesto fue agregado exitosamente al gestor de repuestos, presione Enter para elegir otra opción.");
+            Console.ReadKey();
+            Console.Clear();
+        }
+
+        public static void Eliminar(VentaRepuestos gestorRepuestos)
+        {
+            //Declaración de variables
+            string _codigoRepuesto;
+            int _codigoRepuestoValidado = 0;
+            bool flag;
+
+            do
+            {
+                Console.WriteLine("Ingrese el código del repuesto que desea eliminar");
+                _codigoRepuesto = Console.ReadLine();
+                flag = FuncionValidacionCodigo(_codigoRepuesto, ref _codigoRepuestoValidado);
+
+            } while (flag == false);
+
+            gestorRepuestos.QuitarRepuesto(_codigoRepuestoValidado);
+        }
+
+        public static void Modificar(VentaRepuestos gestorRepuestos)
+        {
+            //Declaración de variables
+            string _codigoRepuesto;
+            int _codigoRepuestoValidado = 0;
+            string _precioRepuesto;
+            double _precioRepuestoValidado = 0;
+            bool flag;
+
+            do
+            {
+                Console.WriteLine("Ingrese el código del repuesto que desea modificar el precio");
+                _codigoRepuesto = Console.ReadLine();
+                flag = FuncionValidacionCodigo(_codigoRepuesto, ref _codigoRepuestoValidado);
+
+            } while (flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese el nuevo precio que desea colocarle al repuesto");
+                _precioRepuesto = Console.ReadLine();
+                flag = FuncionValidacionPrecio(_precioRepuesto, ref _precioRepuestoValidado);
+
+            } while (flag == false);
+
+            gestorRepuestos.ModificarPrecio(_codigoRepuestoValidado, _precioRepuestoValidado);
+        }
+
+        public static void AgregarS(VentaRepuestos gestorRepuestos)
+        {
+            //Declaración de variables
+            string _codigoRepuesto;
+            int _codigoRepuestoValidado = 0;
+            string _stockRepuesto;
+            int _stockRepuestoValidado = 0;
+            bool flag;
+
+            do
+            {
+                Console.WriteLine("Ingrese el código del repuesto que desea agregar el stock");
+                _codigoRepuesto = Console.ReadLine();
+                flag = FuncionValidacionCodigo(_codigoRepuesto, ref _codigoRepuestoValidado);
+
+            } while (flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese la cantidad de stock que desea adicionarle al repuesto");
+                _stockRepuesto = Console.ReadLine();
+                flag = FuncionValidacionStock(_stockRepuesto, ref _stockRepuestoValidado);
+
+            } while (flag == false);
+
+            gestorRepuestos.AgregarStock(_codigoRepuestoValidado,_stockRepuestoValidado);
+        }
+
+        public static void QuitarS(VentaRepuestos gestorRepuestos)
+        {
+            //Declaración de variables
+            string _codigoRepuesto;
+            int _codigoRepuestoValidado = 0;
+            string _stockRepuesto;
+            int _stockRepuestoValidado = 0;
+            bool flag;
+
+            do
+            {
+                Console.WriteLine("Ingrese el código del repuesto que desea agregar el stock");
+                _codigoRepuesto = Console.ReadLine();
+                flag = FuncionValidacionCodigo(_codigoRepuesto, ref _codigoRepuestoValidado);
+
+            } while (flag == false);
+
+            do
+            {
+                Console.WriteLine("Ingrese la cantidad de stock que desea quitarle al repuesto");
+                _stockRepuesto = Console.ReadLine();
+                flag = FuncionValidacionStock(_stockRepuesto, ref _stockRepuestoValidado);
+
+            } while (flag == false);
+
+            gestorRepuestos.QuitarStock(_codigoRepuestoValidado, _stockRepuestoValidado);
+        }
+
+        public static void Salir()
+        {
+            Console.WriteLine("Usted ha salido del gestor de repuestos, presione Enter");
+            Console.ReadKey();
+
+            Environment.Exit(0);
         }
 
         //Funciones que validan los inputs requeridos al usuario
@@ -156,6 +357,64 @@ namespace ProyectoRepuesto.InterfazGrafica
 
             return flag;
         }
+
+        public static bool FuncionValidacionCadena(ref string cadena)
+        {
+            //Declaración de variables
+            bool flag = false;
+
+            if (string.IsNullOrEmpty(cadena))
+            {
+                Console.WriteLine("ERROR! El valor ingresado no puede ser vacío, intente nuevamente.");
+            }
+            else
+            {
+                flag = true;
+            }
+
+            return flag;
+        }
+
+        public static bool FuncionValidacionPrecio(string precio, ref double precioValidado)
+        {
+            //Declaración de variables
+            bool flag = false;
+
+            if (!Double.TryParse(precio, out precioValidado))
+            {
+                Console.WriteLine("ERROR! El precio ingresado tiene que ser de tipo numérico, intente nuevamente.");
+            }
+            else if (precioValidado <= 0)
+            {
+                Console.WriteLine("ERROR! El precio ingresado tiene que ser mayor a cero, intente nuevamente.");
+            }
+            else
+            {
+                flag = true;
+            }
+
+            return flag;
+        }
+
+        public static bool FuncionValidacionStock(string stock, ref int stockValidado)
+        {
+            //Declaración de variables
+            bool flag = false;
+
+            if (!int.TryParse(stock, out stockValidado))
+            {
+                Console.WriteLine("ERROR! El valor ingresado tiene que ser de tipo numérico, intente nuevamente.");
+            }
+            else if (stockValidado <= 0)
+            {
+                Console.WriteLine("ERROR! El stock ingresado tiene que ser mayor a cero, intente nuevamente.");
+            }
+            else
+            {
+                flag = true;
+            }
+
+            return flag;
         }
     }
 }

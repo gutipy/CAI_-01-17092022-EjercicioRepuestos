@@ -1,3 +1,11 @@
 D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.AssemblyReference.cache
 D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.SuggestedBindingRedirects.cache
 D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\bin\Debug\ProyectoRepuesto.InterfazGrafica.exe.config
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\bin\Debug\ProyectoRepuesto.InterfazGrafica.exe
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\bin\Debug\ProyectoRepuesto.InterfazGrafica.pdb
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\bin\Debug\ProyectoRepuesto.Dominio.dll
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\bin\Debug\ProyectoRepuesto.Dominio.pdb
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.csproj.CopyComplete
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.exe
+D:\Documents\GitHub\CAI_-01-17092022-EjercicioRepuestos\ProyectoRepuesto\ProyectoRepuesto.InterfazGrafica\obj\Debug\ProyectoRepuesto.InterfazGrafica.pdb
